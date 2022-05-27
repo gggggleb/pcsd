@@ -1,0 +1,2 @@
+cd /var/home/gleb/.local/lib/python3.10/site-packages/pcsd/
+python __init__.py
