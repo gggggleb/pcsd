@@ -1,10 +1,17 @@
 import glob
 import os
+import sys
 import pickle
 import socket
 
-ip = '127.0.0.1'
-port = 4010
+try:
+    ip = sys.argv[1]
+    port = int(sys.argv[2])
+except IndexError:
+    print('Argv not found use default')
+    ip = '127.0.0.1'
+    port = 4010
+
 max_connect = 10
 
 print('PCSD is open source software publiched license GNU GPL3')

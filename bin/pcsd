@@ -1,1 +1,1 @@
-python -m pcsd
+python -m pcsd $@
