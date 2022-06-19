@@ -78,12 +78,22 @@ except IndexError:
     pass
 
 try:
+    from config import *
+    ip = ip
+    port = port
+    config = 1
+except ModuleNotFoundError:
+    config = 0
+
+
+try:
     ip = sys.argv[1]
     port = int(sys.argv[2])
 except IndexError:
-    print('Argv not found use default')
-    ip = '127.0.0.1'
-    port = 4010
+    if config == 0:
+        print('Argv not found use default')
+        ip = '127.0.0.1'
+        port = 4010
 
 max_connect = 10
 
