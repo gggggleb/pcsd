@@ -12,7 +12,7 @@ steps:
   - name: test
     image: python
     commands:
-      - pip install .
+      - pip install package/*.whl
       - pcsd test
   - name: publish
     image: pwddocker/drone-publish:latest
