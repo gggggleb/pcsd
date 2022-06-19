@@ -12,8 +12,10 @@ steps:
   - name: test
     image: python
     commands:
-      - pip install package/*.whl
+      - pip install .
       - pcsd test
+    when:
+      event: [ tag, push, pull_request ]
   - name: publish
     image: pwddocker/drone-publish:latest
     environment:
