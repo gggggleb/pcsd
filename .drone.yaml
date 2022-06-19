@@ -1,6 +1,9 @@
 kind: pipeline
 name: build
 
+concurrency:
+  limit: 1
+
 steps:
   - name: build
     image: python:alpine
@@ -26,6 +29,9 @@ trigger:
 kind: pipeline
 type: docker
 name: test
+
+concurrency:
+  limit: 1
 
 steps:
   - name: test
