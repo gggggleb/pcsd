@@ -9,11 +9,6 @@ steps:
       - rm -r pcsd.egg-info/ build/
       - mkdir package
       - mv *.whl package
-  - name: test
-    image: python
-    commands:
-      - pip install .
-      - pcsd test
   - name: publish
     image: pwddocker/drone-publish:latest
     environment:
@@ -27,3 +22,20 @@ steps:
 trigger:
    event: [ tag, push ]
    branch: [ master ]
+
+kind: pipeline
+type: docker
+name: test
+
+steps:
+  - name: test
+    image: python
+    commands:
+      - pip install .
+      - pcsd test
+
+trigger:
+  event:
+  - pull_request
+  action:
+  - opened
