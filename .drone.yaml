@@ -27,6 +27,5 @@ steps:
       event:
         - push
         - tag
-        - pull_request
       branch:
         - master
