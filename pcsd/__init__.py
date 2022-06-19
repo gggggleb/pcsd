@@ -1,3 +1,4 @@
+import glob
 import sys
 import random
 import string
@@ -62,7 +63,19 @@ def test():
         else:
             print('rm test no!')
 
-    if status == 4:
+    main.clear()
+    main.set(randomword(255), randomword(255))
+    main.save()
+    for file in glob.glob('dump.pkl'):
+        if file == 'dump.pkl':
+            print('save test ok!')
+            status += 1
+            main.rmdump()
+        else:
+            print('save test no!')
+            main.rmdump()
+
+    if status == 5:
         print('All metods OK!')
         sys.exit(0)
     else:
@@ -79,12 +92,12 @@ except IndexError:
 
 try:
     from config import *
+
     ip = ip
     port = port
     config = 1
 except ModuleNotFoundError:
     config = 0
-
 
 try:
     ip = sys.argv[1]
