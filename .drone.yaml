@@ -23,8 +23,6 @@ steps:
         from_secret: user
     commands:
       - python3 -m twine upload --repository-url https://git.glebmail.xyz/api/packages/PythonPrograms/pypi -u $USER -p $PASS package/*.whl
-    when:
-      event: [ tag, push, pull_request ]
 
 trigger:
    event: [ tag, push ]
