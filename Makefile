@@ -7,4 +7,3 @@ test:
 		python pcsd_test.py
 install:
 		pip install .
-		rm -r pcsd.egg-info/ build/
