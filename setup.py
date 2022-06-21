@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
     name='pcsd',
-    version='1.8',
+    version='1.9',
     description='Pcsd server',
     url='https://git.glebmail.xyz/PythonPrograms/pcsd',
     author='gleb',

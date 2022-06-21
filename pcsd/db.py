@@ -48,3 +48,17 @@ class Pcsd_db:
     def rename(self, key, keynew):
         value = self.db.pop(key)
         self.db[keynew] = value
+
+    def find_key(self, key):
+        keys = self.db.keys()
+        for db_key in keys:
+            if db_key == key:
+                return 'Found'
+        return 'Not_found'
+
+    def find_value(self, value):
+        values = self.db.values()
+        for db_value in values:
+            if db_value == value:
+                return 'Found'
+        return 'Not_found'
