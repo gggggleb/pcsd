@@ -147,7 +147,12 @@ print('Binded', ip, port)
 db = Pcsd_db()
 
 
-def Net(db, sock, conn, req):
+def Net(db, sock, conn, status):
+    if status == 'init':
+        conn.send('sendreq'.encode())
+    req = conn.recv(2048)
+    req = req.decode()
+    print(req)
     if req == 'set':
         key = conn.recv(2048)
         value = conn.recv(2048)
@@ -213,9 +218,8 @@ while True:
     conn, addr = sock.accept()
     print('Connected!', addr)
     conn_block.acquire()
-    req = conn.recv(2048)
-    req = req.decode()
-    print(req)
-    start_new_thread(Net, (db, sock, conn, req))
+    status = conn.recv(2048)
+    status = status.decode()
+    start_new_thread(Net, (db, sock, conn, status))
 
 
