@@ -3,6 +3,8 @@ import sys
 import random
 import string
 import socket
+from _thread import *
+import threading
 from pcsd.db import Pcsd_db
 
 
@@ -132,6 +134,8 @@ except IndexError:
         port = 4010
         max_connect = 10
 
+conn_block = threading.Lock()
+
 print('PCSD is open source software publiched license GNU GPL3')
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -142,12 +146,8 @@ print('Binded', ip, port)
 
 db = Pcsd_db()
 
-while True:
-    conn, addr = sock.accept()
-    print('Connnected', addr)
-    req = conn.recv(2048)
-    req = req.decode()
-    print(req)
+
+def Net(db, sock, conn, req):
     if req == 'set':
         key = conn.recv(2048)
         value = conn.recv(2048)
@@ -204,3 +204,18 @@ while True:
         value = value.decode()
         result = db.find_value(value)
         conn.send(result.encode())
+    try:
+        conn_block.release()
+    except RuntimeError:
+        pass
+
+while True:
+    conn, addr = sock.accept()
+    print('Connected!', addr)
+    conn_block.acquire()
+    req = conn.recv(2048)
+    req = req.decode()
+    print(req)
+    start_new_thread(Net, (db, sock, conn, req))
+
+
