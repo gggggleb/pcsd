@@ -1,9 +1,9 @@
 def Net(db, sock, conn, status, conn_block):
-    if status == 'init':
-        conn.send('sendreq'.encode())
-    req = conn.recv(2048)
-    req = req.decode()
-    print(req)
+    if status == 'init':  # init get
+        conn.send('sendreq'.encode())  # send req
+    req = conn.recv(2048)  # req get
+    req = req.decode()  # req decode
+    print(req)  # print req
     if req == 'set':
         key = conn.recv(2048)
         value = conn.recv(2048)
