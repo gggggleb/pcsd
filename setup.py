@@ -9,5 +9,8 @@ setup(
     packages=['pcsd'],
     author_email='gleb@glebmail.xyz',
     license='GNU GPL 3',
-    scripts=['bin/pcsd']
+    scripts=['bin/pcsd'],
+    install_requires=[
+        'pyyaml',
+    ],
 )
