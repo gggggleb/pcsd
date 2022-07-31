@@ -1,6 +1,7 @@
 import yaml
 import importlib
 
+
 def Net(db, sock, conn, status, conn_block):
     if status == 'init':  # init get
         conn.send('sendreq'.encode())  # send req
@@ -64,7 +65,9 @@ def Net(db, sock, conn, status, conn_block):
         result = db.find_value(value)
         conn.send(result.encode())
     if req == 'list':
-        conn.send(str(db.list()).encode())
+        listing = db.list()
+        listing = str(listing)
+        conn.send(listing.encode())
     try:
         with open('plugins.yml', 'r') as stream:
             out = yaml.safe_load(stream)

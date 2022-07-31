@@ -66,3 +66,6 @@ class Pcsd_db:  # pcsd db class
             if db_value == value:
                 return 'Found'  # found
         return 'Not_found'  # not_found
+
+    def list(self):
+        return self.db
